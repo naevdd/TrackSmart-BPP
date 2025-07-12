@@ -1,0 +1,66 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Beckn Unified Logistics Tracking BPP",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/beckn/track": {
+      "post": {
+        "summary": "Track shipment",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "context": { "type": "object" },
+                  "message": {
+                    "type": "object",
+                    "properties": {
+                      "order_id": { "type": "string" },
+                      "provider_id": { "type": "string" }
+                    },
+                    "required": ["order_id", "provider_id"]
+                  }
+                },
+                "required": ["context", "message"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tracking data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "context": { "type": "object" },
+                    "message": {
+                      "type": "object",
+                      "properties": {
+                        "tracking": {
+                          "type": "object",
+                          "properties": {
+                            "order_id": { "type": "string" },
+                            "status": { "type": "string" },
+                            "last_location": { "type": "string" },
+                            "transport_mode": { "type": "string" },
+                            "estimated_delivery": { "type": "string" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
